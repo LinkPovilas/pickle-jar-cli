@@ -1,0 +1,23 @@
+{
+  "name": "pickle-jar-cli",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "pickle-jar": "bin/pickle-jar.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "commander": "^12.1.0",
+    "figlet": "^1.7.0",
+    "glob": "^10.4.3",
+    "jest": "^29.7.0",
+    "yargs": "^17.7.2",
+    "@cucumber/gherkin-utils": "^9.0.0"
+  }
+}

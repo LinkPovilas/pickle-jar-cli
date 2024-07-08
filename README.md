@@ -1,1 +1,1 @@
-# pickle-jar-cli
+# Pickle Jar CLI
