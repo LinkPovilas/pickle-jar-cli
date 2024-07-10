@@ -1,14 +1,14 @@
-"use strict";
+#!/usr/bin/env node
 
-const fs = require("fs");
-const { glob } = require("glob");
-const { IdGenerator } = require("@cucumber/messages");
+import { readFileSync } from "node:fs";
+import { glob } from "glob";
+import { IdGenerator } from "@cucumber/messages";
 
-const {
+import {
   AstBuilder,
   GherkinClassicTokenMatcher,
   Parser,
-} = require("@cucumber/gherkin");
+} from "@cucumber/gherkin";
 
 const featureFilesPattern = "features/**/*.feature";
 
@@ -27,7 +27,7 @@ function getScenarioPaths() {
     const featureFiles = glob.sync(featureFilesPattern);
 
     const scenarioPaths = featureFiles.flatMap((file) => {
-      const content = fs.readFileSync(file, "utf8");
+      const content = readFileSync(file, "utf8");
       const gherkinDocument = parser.parse(content);
 
       return gherkinDocument.feature.children
@@ -58,4 +58,4 @@ function getScenarioPaths() {
   }
 }
 
-module.exports = { getScenarioPaths };
+export { getScenarioPaths };

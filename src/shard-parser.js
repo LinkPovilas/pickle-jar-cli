@@ -1,4 +1,4 @@
-"use strict";
+#!/usr/bin/env node
 
 /**
  * Process the shard input options.
@@ -13,7 +13,7 @@ const processShardInput = (options) => {
     throw new Error("Shard option is required");
   }
 
-  if (!RegExp(/^\d+\/\d+$/).test(shard)) {
+  if (!new RegExp(/^\d+\/\d+$/).test(shard)) {
     throw new Error("Invalid shard input");
   }
 
@@ -32,11 +32,11 @@ const processShardInput = (options) => {
  */
 function calculateShardRange(shardIndex, shardTotal, totalTests) {
   if (shardIndex === 0 || shardTotal === 0 || totalTests === 0) {
-    return null;
+    return;
   }
 
   if (shardIndex > totalTests) {
-    return null;
+    return;
   }
 
   const testsPerShard = Math.max(Math.floor(totalTests / shardTotal), 1);
@@ -71,8 +71,4 @@ function getScenarioPathsByShardRange(scenarioPaths, shardRange) {
     : [scenarioPaths[startIndex]];
 }
 
-module.exports = {
-  processShardInput,
-  calculateShardRange,
-  getScenarioPathsByShardRange,
-};
+export { processShardInput, calculateShardRange, getScenarioPathsByShardRange };

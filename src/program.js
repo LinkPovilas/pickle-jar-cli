@@ -1,16 +1,14 @@
-"use strict";
-
-const figlet = require("figlet");
-const { program, OptionValues } = require("commander");
-const { exec } = require("child_process");
+import { textSync } from "figlet";
+import { program } from "commander";
+import { exec } from "node:child_process";
 
 /**
  * Sets up the command-line interface (CLI) for the Pickle Jar application.
  *
- * @return {{testScript: string, options: OptionValues}} An object containing the test script and CLI options.
+ * @return {{testScript: string, options: {[x: string]: any;}}} An object containing the test script and CLI options.
  */
 function setupCli() {
-  console.log(figlet.textSync("Pickle Jar"));
+  console.log(textSync("Pickle Jar"));
   program
     .name("pickle-jar")
     .version("1.0.0")
@@ -36,4 +34,4 @@ function executeTestScript(testScript, scenarioPathsToRun) {
   exec(`${testScript} ${scenarioPathsToRun.join(" ")}`);
 }
 
-module.exports = { setupCli, executeTestScript };
+export { setupCli, executeTestScript };

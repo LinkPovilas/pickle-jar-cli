@@ -1,15 +1,16 @@
-const { calculateShardRange } = require("./shard-parser");
+import { describe, it, expect } from "@jest/globals";
+import { calculateShardRange } from "./shard-parser";
 
 describe("calculateShardRange", () => {
   it.each`
     shardIndex | shardTotal | totalTests | expected
-    ${0}       | ${0}       | ${0}       | ${null}
-    ${0}       | ${0}       | ${1}       | ${null}
-    ${0}       | ${1}       | ${1}       | ${null}
-    ${1}       | ${1}       | ${0}       | ${null}
-    ${1}       | ${2}       | ${0}       | ${null}
-    ${0}       | ${1}       | ${2}       | ${null}
-    ${2}       | ${2}       | ${1}       | ${null}
+    ${0}       | ${0}       | ${0}       | ${undefined}
+    ${0}       | ${0}       | ${1}       | ${undefined}
+    ${0}       | ${1}       | ${1}       | ${undefined}
+    ${1}       | ${1}       | ${0}       | ${undefined}
+    ${1}       | ${2}       | ${0}       | ${undefined}
+    ${0}       | ${1}       | ${2}       | ${undefined}
+    ${2}       | ${2}       | ${1}       | ${undefined}
     ${1}       | ${1}       | ${1}       | ${[0]}
     ${1}       | ${2}       | ${1}       | ${[0]}
     ${1}       | ${2}       | ${2}       | ${[0]}
@@ -34,7 +35,7 @@ describe("calculateShardRange", () => {
     ${1}       | ${4}       | ${88}      | ${[0, 21]}
     ${1}       | ${7}       | ${6}       | ${[0]}
     ${6}       | ${7}       | ${6}       | ${[5]}
-    ${7}       | ${7}       | ${6}       | ${null}
+    ${7}       | ${7}       | ${6}       | ${undefined}
     ${2}       | ${2}       | ${3}       | ${[1, 2]}
     ${2}       | ${2}       | ${4}       | ${[2, 3]}
     ${2}       | ${2}       | ${5}       | ${[2, 4]}

@@ -1,13 +1,10 @@
-#!/usr/bin/env node
-"use strict";
-
-const { setupCli, executeTestScript } = require("../src/program.js");
-const { getScenarioPaths } = require("../src/gherkin-parser.js");
-const {
+import { setupCli, executeTestScript } from "../src/program.js";
+import { getScenarioPaths } from "../src/gherkin-parser.js";
+import {
   processShardInput,
   calculateShardRange,
   getScenarioPathsByShardRange,
-} = require("../src/shard-parser.js");
+} from "../src/shard-parser.js";
 
 const bootstrap = () => {
   const { testScript, options } = setupCli();
