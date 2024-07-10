@@ -26,7 +26,7 @@ function getScenarioPaths() {
     const parser = new Parser(builder, matcher);
     const featureFiles = glob.sync(featureFilesPattern);
 
-    return featureFiles.flatMap((file) => {
+    const scenarioPaths = featureFiles.flatMap((file) => {
       const content = fs.readFileSync(file, "utf8");
       const gherkinDocument = parser.parse(content);
 
@@ -45,10 +45,17 @@ function getScenarioPaths() {
           return [`${file}:${line}`];
         });
     });
+
+    if (scenarioPaths.length === 0) {
+      console.error("No scenarios found");
+      process.exit(1);
+    }
+
+    return scenarioPaths;
   } catch (error) {
     console.error("Error in parsing feature files:", error);
     throw error;
   }
 }
 
-module.exports = getScenarioPaths;
+module.exports = { getScenarioPaths };

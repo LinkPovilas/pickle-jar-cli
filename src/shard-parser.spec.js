@@ -1,4 +1,4 @@
-const calculateShardRange = require("./shard");
+const { calculateShardRange } = require("./shard-parser");
 
 describe("calculateShardRange", () => {
   it.each`
@@ -32,6 +32,9 @@ describe("calculateShardRange", () => {
     ${1}       | ${4}       | ${33}      | ${[0, 7]}
     ${1}       | ${4}       | ${77}      | ${[0, 18]}
     ${1}       | ${4}       | ${88}      | ${[0, 21]}
+    ${1}       | ${7}       | ${6}       | ${[0]}
+    ${6}       | ${7}       | ${6}       | ${[5]}
+    ${7}       | ${7}       | ${6}       | ${null}
     ${2}       | ${2}       | ${3}       | ${[1, 2]}
     ${2}       | ${2}       | ${4}       | ${[2, 3]}
     ${2}       | ${2}       | ${5}       | ${[2, 4]}
