@@ -7,19 +7,19 @@
  * @return {Array} An array containing the shard index and total.
  */
 const processShardInput = (options) => {
-  const shard = options.shard;
+    const shard = options.shard;
 
-  if (!shard) {
-    throw new Error("Shard option is required");
-  }
+    if (!shard) {
+        throw new Error('Shard option is required');
+    }
 
-  if (!new RegExp(/^\d+\/\d+$/).test(shard)) {
-    throw new Error("Invalid shard input");
-  }
+    if (!new RegExp(/^\d+\/\d+$/).test(shard)) {
+        throw new Error('Invalid shard input');
+    }
 
-  const [shardIndex, shardTotal] = shard.split("/").map(Number);
-  console.log(`Shard: ${shard}`);
-  return [shardIndex, shardTotal];
+    const [shardIndex, shardTotal] = shard.split('/').map(Number);
+    console.log(`Shard: ${shard}`);
+    return [shardIndex, shardTotal];
 };
 
 /**
@@ -31,25 +31,25 @@ const processShardInput = (options) => {
  * @return {Array<number>} An array representing the range of tests for the specified shard.
  */
 function calculateShardRange(shardIndex, shardTotal, totalTests) {
-  if (shardIndex === 0 || shardTotal === 0 || totalTests === 0) {
-    return;
-  }
+    if (shardIndex === 0 || shardTotal === 0 || totalTests === 0) {
+        return;
+    }
 
-  if (shardIndex > totalTests) {
-    return;
-  }
+    if (shardIndex > totalTests) {
+        return;
+    }
 
-  const testsPerShard = Math.max(Math.floor(totalTests / shardTotal), 1);
-  const additionalScenario =
-    shardIndex === shardTotal ? totalTests % shardTotal : 0;
+    const testsPerShard = Math.max(Math.floor(totalTests / shardTotal), 1);
+    const additionalScenario =
+        shardIndex === shardTotal ? totalTests % shardTotal : 0;
 
-  const startIndex = (shardIndex - 1) * testsPerShard;
-  const endIndex = shardIndex * testsPerShard - 1 + additionalScenario;
+    const startIndex = (shardIndex - 1) * testsPerShard;
+    const endIndex = shardIndex * testsPerShard - 1 + additionalScenario;
 
-  const shardRange =
-    startIndex === endIndex ? [startIndex] : [startIndex, endIndex];
+    const shardRange =
+        startIndex === endIndex ? [startIndex] : [startIndex, endIndex];
 
-  return shardRange;
+    return shardRange;
 }
 
 /**
@@ -60,15 +60,15 @@ function calculateShardRange(shardIndex, shardTotal, totalTests) {
  * @returns {string[]} The selected range of scenario paths.
  */
 function getScenarioPathsByShardRange(scenarioPaths, shardRange) {
-  if (!shardRange) {
-    console.error("No scenarios to run");
-    process.exit(1);
-  }
+    if (!shardRange) {
+        console.error('No scenarios to run');
+        process.exit(1);
+    }
 
-  const [startIndex, endIndex] = shardRange;
-  return endIndex
-    ? scenarioPaths.slice(startIndex, endIndex + 1)
-    : [scenarioPaths[startIndex]];
+    const [startIndex, endIndex] = shardRange;
+    return endIndex
+        ? scenarioPaths.slice(startIndex, endIndex + 1)
+        : [scenarioPaths[startIndex]];
 }
 
 export { processShardInput, calculateShardRange, getScenarioPathsByShardRange };
