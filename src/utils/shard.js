@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**np
  * Process the shard input options.
  *
@@ -59,8 +57,7 @@ function calculateShardRange(shardIndex, shardTotal, totalTests) {
  */
 function getScenarioPathsByShardRange(scenarioPaths, shardRange) {
     if (!shardRange) {
-        console.error('No scenarios to run');
-        process.exit(1);
+        throw new Error('No scenarios to run');
     }
 
     const [startIndex, endIndex] = shardRange;

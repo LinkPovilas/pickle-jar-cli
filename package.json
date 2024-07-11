@@ -1,9 +1,9 @@
 {
-  "name": "@pickle-jar/cli",
+  "name": "pickle-jar",
   "version": "1.0.0",
   "description": "",
   "bin": {
-    "pickle-jar": "bin/pickle-jar.js"
+    "pickle-jar": "./bin/cli.js"
   },
   "type": "module",
   "engines": {
@@ -52,7 +52,7 @@
       "npm run lint"
     ]
   },
-  "main": "bin/pickle-jar.js",
+  "main": "bin/cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LinkPovilas/pickle-jar-cli.git"
