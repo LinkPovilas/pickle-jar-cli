@@ -45,7 +45,7 @@
     "@cucumber/gherkin-utils": "^9.0.0",
     "commander": "^12.1.0",
     "figlet": "^1.7.0",
-    "glob": "^10.4.3"
+    "glob": "^11.0.0"
   },
   "lint-staged": {
     "**/*.{js,json}": [
