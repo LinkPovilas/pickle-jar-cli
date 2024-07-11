@@ -18,9 +18,4 @@ export default [
     {
         ignores: ['node_modules/', 'coverage/', 'features/'],
     },
-    {
-        rules: {
-            'unicorn/better-regex': 'warn',
-        },
-    },
 ];

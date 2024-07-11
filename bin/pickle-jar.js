@@ -1,26 +1,34 @@
-import { setupCli, executeTestScript } from '../src/program.js';
-import { getScenarioPaths } from '../src/gherkin-parser.js';
-import {
-    processShardInput,
-    calculateShardRange,
-    getScenarioPathsByShardRange,
-} from '../src/shard-parser.js';
+#!/usr/bin/env node
+import figlet from 'figlet';
+import { Command } from 'commander';
+
+import { runScenarios } from '../src/actions/run-scenarios.js';
+import { getPackageVersion } from '../src/utils/package.js';
 
 const bootstrap = () => {
-    const { testScript, options } = setupCli();
-    const [shardIndex, shardTotal] = processShardInput(options);
-    const scenarioPaths = getScenarioPaths();
-    const shardRange = calculateShardRange(
-        shardIndex,
-        shardTotal,
-        scenarioPaths.length
-    );
-    const scenarioPathsToRun = getScenarioPathsByShardRange(
-        scenarioPaths,
-        shardRange
-    );
+    console.info(figlet.textSync('Pickle Jar'));
+    const program = new Command();
 
-    executeTestScript(testScript, scenarioPathsToRun);
+    program
+        .name('pickle-jar')
+        .version(
+            getPackageVersion(),
+            '-v, --version',
+            'Output the current version.'
+        )
+        .usage('<command> [options]')
+        .helpOption('-h, --help', 'Output usage information.');
+
+    program
+        .command('test')
+        .description('Run cucumber scenarios')
+        .argument('<shardIndex/shardTotal>', 'Run a subset of scenarios')
+        .allowUnknownOption()
+        .action(async (shard) => {
+            await runScenarios(shard, program.args);
+        });
+
+    program.parseAsync(process.argv);
 };
 
 bootstrap();

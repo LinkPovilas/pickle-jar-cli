@@ -1,14 +1,12 @@
 #!/usr/bin/env node
 
-/**
+/**np
  * Process the shard input options.
  *
  * @param {Object} options - The options object containing the shard input.
- * @return {Array} An array containing the shard index and total.
+ * @return {Array<number, number>} An array containing the shard index and total.
  */
-const processShardInput = (options) => {
-    const shard = options.shard;
-
+const processShardInput = (shard) => {
     if (!shard) {
         throw new Error('Shard option is required');
     }
@@ -18,7 +16,7 @@ const processShardInput = (options) => {
     }
 
     const [shardIndex, shardTotal] = shard.split('/').map(Number);
-    console.log(`Shard: ${shard}`);
+    console.info(`Shard: ${shard}`);
     return [shardIndex, shardTotal];
 };
 
