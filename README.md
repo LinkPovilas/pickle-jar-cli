@@ -11,7 +11,7 @@ $ npm i -D @pickle-jar/cli
 ## Usage
 
 ```bash
-$ npx pickle-jar test 1/4
+$ npx @pickle-jar/cli test 1/4
 ```
 
 ## License
