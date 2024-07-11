@@ -33,8 +33,6 @@ function runScenarios(shard, cucumberArguments) {
     const arguments_ = [
         'cucumber-js',
         ...scenarioPathsToRun,
-        '-f',
-        'summary',
         ...cucumberOptions,
     ];
 
