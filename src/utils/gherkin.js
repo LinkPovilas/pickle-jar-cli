@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { readFileSync } from 'node:fs';
 import { glob } from 'glob';
 import { IdGenerator } from '@cucumber/messages';
@@ -48,8 +46,7 @@ function getScenarioPaths() {
         });
 
         if (scenarioPaths.length === 0) {
-            console.error('No scenarios found');
-            process.exit(1);
+            throw new Error('No scenarios found');
         }
 
         return scenarioPaths;
