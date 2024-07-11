@@ -1,5 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
-import { calculateShardRange } from './shard-parser';
+
+import { calculateShardRange } from './shard.js';
 
 describe('calculateShardRange', () => {
     it.each`
