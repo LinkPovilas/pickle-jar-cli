@@ -7,7 +7,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">= 18.00"
+    "node": ">=18"
   },
   "scripts": {
     "test": "jest",

@@ -1,4 +1,3 @@
-import { promisify } from 'node:util';
 import { exec } from 'node:child_process';
 
 import { getScenarioPaths } from '../utils/gherkin.js';
@@ -32,11 +31,14 @@ async function runScenarios(shard, cucumberArguments) {
     const cucumberOptions = cucumberArguments.slice(2);
     const testScript = `npx cucumber-js ${scenarioPathsToRun.join(' ')} ${cucumberOptions.join(' ')}`;
 
-    try {
-        await promisify(exec)(testScript);
-    } catch (error) {
-        console.error(error.message);
-    }
+    exec(testScript, (error, stdout, stderr) => {
+        if (error) {
+            console.error(error);
+            return;
+        }
+        console.info(stdout);
+        console.error(stderr);
+    });
 }
 
 export { runScenarios };
