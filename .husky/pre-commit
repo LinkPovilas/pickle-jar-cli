@@ -1,5 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx --no-install lint-staged
-npm test
+if [ "$CI" != "true" ]; then
+  npx --no-install lint-staged
+  npm test
+fi
