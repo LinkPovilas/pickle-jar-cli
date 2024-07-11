@@ -1,4 +1,4 @@
-import { exec } from 'node:child_process';
+import { spawn } from 'node:child_process';
 
 import { getScenarioPaths } from '../utils/gherkin.js';
 import {
@@ -14,7 +14,7 @@ import {
  * @param {Array<string>} cucumberArguments - Additional arguments for running scenarios.
  * @return {Promise<void>} Promise that resolves after running the scenarios.
  */
-async function runScenarios(shard, cucumberArguments) {
+function runScenarios(shard, cucumberArguments) {
     const [shardIndex, shardTotal] = processShardInput(shard);
     const scenarioPaths = getScenarioPaths();
     const shardRange = calculateShardRange(
@@ -29,15 +29,33 @@ async function runScenarios(shard, cucumberArguments) {
 
     console.info(`Running ${scenarioPathsToRun.length} scenarios...`);
     const cucumberOptions = cucumberArguments.slice(2);
-    const testScript = `npx cucumber-js ${scenarioPathsToRun.join(' ')} ${cucumberOptions.join(' ')}`;
+    const testScript = 'npx';
+    const arguments_ = [
+        'cucumber-js',
+        ...scenarioPathsToRun,
+        '-f',
+        'summary',
+        ...cucumberOptions,
+    ];
 
-    exec(testScript, (error, stdout, stderr) => {
-        if (error) {
-            console.error(error);
-            return;
+    const childProcess = spawn(testScript, arguments_);
+
+    childProcess.stdout.on('data', (data) => {
+        console.info(data.toString());
+    });
+
+    childProcess.stderr.on('data', (data) => {
+        console.error(data.toString());
+    });
+
+    childProcess.on('error', (error) => {
+        console.error('Error during execution:', error);
+    });
+
+    childProcess.on('close', (code) => {
+        if (code !== 0) {
+            console.error('Process exited with code:', code);
         }
-        console.info(stdout);
-        console.error(stderr);
     });
 }
 

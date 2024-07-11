@@ -24,9 +24,7 @@ const bootstrap = () => {
         .description('Run cucumber scenarios')
         .argument('<shardIndex/shardTotal>', 'Run a subset of scenarios')
         .allowUnknownOption()
-        .action(async (shard) => {
-            await runScenarios(shard, program.args);
-        });
+        .action((shard) => runScenarios(shard, program.args));
 
     program.parseAsync(process.argv);
 };
