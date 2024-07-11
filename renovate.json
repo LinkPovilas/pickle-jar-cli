@@ -3,8 +3,8 @@
   "extends": [
     "config:recommended"
   ],
+  "timezone": "Europe/Vilnius",
   "schedule": [
-    "after 3am",
-    "before 9am"
+    "after 12pm, before 4pm on Wednesday"
   ]
 }
