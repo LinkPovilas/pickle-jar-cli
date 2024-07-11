@@ -1,9 +1,9 @@
 {
-  "name": "pickle-jar",
-  "version": "1.0.4",
+  "name": "@pickle-jar/cli",
+  "version": "1.0.0",
   "description": "",
   "bin": {
-    "pickle-jar": "./bin/cli.js"
+    "pickle-jar": "bin/cli.js"
   },
   "type": "module",
   "engines": {
