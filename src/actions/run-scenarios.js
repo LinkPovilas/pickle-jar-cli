@@ -12,7 +12,6 @@ import {
  *
  * @param {string} shard - The shard input for running scenarios.
  * @param {Array<string>} cucumberArguments - Additional arguments for running scenarios.
- * @return {Promise<void>} Promise that resolves after running the scenarios.
  */
 function runScenarios(shard, cucumberArguments) {
     const [shardIndex, shardTotal] = processShardInput(shard);
